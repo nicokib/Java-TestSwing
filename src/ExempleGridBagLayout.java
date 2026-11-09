@@ -10,7 +10,6 @@ public class ExempleGridBagLayout extends JFrame {
 
     // Étape 1 : Mettre les composants en variables d'instance (champs de la classe)
     // pour qu'ils soient accessibles depuis toutes les méthodes de la classe.
-    private JTextField txtNom;
     private JComboBox<Person> comboPerson;
     private JComboBox<BreadType> comboBreadType;
     private JRadioButton radOui;
@@ -44,6 +43,7 @@ public class ExempleGridBagLayout extends JFrame {
         lstPerson.add(new Person(2L, "Durand", "Marie", Gender.FEMALE));
 
         comboPerson = new JComboBox<Person>(lstPerson.toArray(new Person[0])); // Initialisation de la variable d'instance
+        comboPerson.setSelectedIndex(-1);
         gbc.gridx = 1; gbc.gridy = numGridY; gbc.weightx = 1.0;
         panel.add(comboPerson, gbc);
 
@@ -87,7 +87,7 @@ public class ExempleGridBagLayout extends JFrame {
         panel.add(scrollPane, gbc);
 
         // 6. BOUTON
-        JButton btnValider = new JButton("Valider l'inscription");
+        JButton btnValider = new JButton("Valider la réservation");
         gbc.gridx = 0; gbc.gridy = ++numGridY; gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.NONE; gbc.anchor = GridBagConstraints.CENTER; gbc.weighty = 0.0;
         panel.add(btnValider, gbc);
@@ -107,7 +107,7 @@ public class ExempleGridBagLayout extends JFrame {
      * Étape 2 : Méthode isolée pour gérer le traitement des données du formulaire
      */
     private void traiterFormulaire() {
-        String nom = txtNom.getText().trim();
+        String nom = comboPerson.getSelectedItem() != null ? comboPerson.getSelectedItem().toString() : "Aucun";
 
         if (nom.isEmpty()) {
             JOptionPane.showMessageDialog(this,
@@ -116,17 +116,17 @@ public class ExempleGridBagLayout extends JFrame {
         }
 
         BreadType breadType = (BreadType) comboBreadType.getSelectedItem();
-        String abonnement = radOui.isSelected() ? "Oui" : "Non";
+        String crudity = radOui.isSelected() ? "Oui" : "Non";
         List<String> interetsSelectionnes = listSandwiches.getSelectedValuesList();
         String sawndwich = interetsSelectionnes.isEmpty() ? "Aucun" : String.join(", ", interetsSelectionnes);
 
         String message = String.format(
                 "Résumé de l'inscription :\n\n" +
-                        " Civilité : %s\n" +
                         " Nom : %s\n" +
-                        " Statut : %s\n" +
-                        " Sawndwich : %s",
-                breadType.getDisplayText(), nom, abonnement, sawndwich
+                        " Sawndwich : %s\n" +
+                        " Crudités : %s\n" +
+                        " Type de pain : %s",
+                 nom, sawndwich, crudity , breadType.getDisplayText()
         );
 
         JOptionPane.showMessageDialog(this, message, "Réservation OK", JOptionPane.INFORMATION_MESSAGE);
