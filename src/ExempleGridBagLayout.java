@@ -1,10 +1,13 @@
+import model.BreadType;
+import model.Gender;
+import model.Person;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class ExempleGridBagLayout extends JFrame {
 
@@ -33,7 +36,7 @@ public class ExempleGridBagLayout extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
         panel.add(lblTitre, gbc);
 
-        // 2. COMBOBOX (Person)
+        // 2. COMBOBOX (model.Person)
         JLabel lblNom = new JLabel("Nom :");
         gbc.gridx = 0; gbc.gridy = ++numGridY; gbc.gridwidth = 1; gbc.weightx = 0.0;
         panel.add(lblNom, gbc);

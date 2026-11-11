@@ -1,11 +1,13 @@
-public enum BreadType {
-    WHITE("Blanc"),
-    GREY("Gris");
+package model;
+
+public enum Gender {
+    MALE("Homme"),
+    FEMALE("Femme");
 
     private final String displayText;
 
     // Le constructeur d'un enum est toujours privé
-    BreadType(String displayText) {
+    Gender(String displayText) {
         this.displayText = displayText;
     }
 
